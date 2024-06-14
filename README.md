@@ -58,6 +58,9 @@ go install cosmossdk.io/tools/cosmovisor/cmd/cosmovisor@v1.5.0
 ```
 
 SERVİS OLUŞTURULMASI
+
+
+
 1.KOD
 ```shell
 sudo tee /etc/systemd/system/initiad.service > /dev/null << EOF
