@@ -7,14 +7,14 @@
 
 
 
-GEREKSİNİMLER
+#GEREKSİNİMLER
 
 ```shell
 sudo apt update && sudo apt upgrade -y
 sudo apt install curl git wget htop tmux build-essential jq make lz4 gcc unzip -y
 ```
 
-GO KURULUMU
+#GO KURULUMU
 ```shell
 cd $HOME
 VER="1.21.3"
@@ -29,7 +29,7 @@ source $HOME/.bash_profile
 ```
 
 
-GEREKLİ DOSYALARIN ÇEKİLMESİ
+#GEREKLİ DOSYALARIN ÇEKİLMESİ
 
 
 1.KOD
@@ -45,19 +45,19 @@ mkdir -p $HOME/.initia/cosmovisor/genesis/bin
 mv /root/initia/build/initiad $HOME/.initia/cosmovisor/genesis/bin/
 ```
 
-SYSTEM LİNK
+#SYSTEM LİNK
 
 
 sudo ln -s $HOME/.initia/cosmovisor/genesis $HOME/.initia/cosmovisor/current -f
 sudo ln -s $HOME/.initia/cosmovisor/current/bin/initiad /usr/local/bin/initiad -f
 ```
 
-COSMOVİSOR İNDİRİLMESİ
+#COSMOVİSOR İNDİRİLMESİ
 ```shell
 go install cosmossdk.io/tools/cosmovisor/cmd/cosmovisor@v1.5.0
 ```
 
-SERVİS OLUŞTURULMASI
+#SERVİS OLUŞTURULMASI
 
 
 
@@ -88,7 +88,7 @@ EOF
 sudo systemctl daemon-reload
 sudo systemctl enable initiad.service
 ```
-INIT
+#INIT
 
 1.KOD
 
@@ -102,7 +102,7 @@ initiad config set client keyring-backend test
 ```shell
 initiad init NODEADINIYAZ --chain-id initiation-1
 ```
-PORT AYARLARI
+#PORT AYARLARI
 
 1.KOD
 
@@ -133,7 +133,7 @@ s%^external_address = \"\"%external_address = \"$(wget -qO- eth0.me):${N_PORT}65
 s%:26660%:${N_PORT}660%g" $HOME/.initia/config/config.toml
 ```
 
-SEED KODU
+#SEED KODU
 
 ```shell
 SEEDS="cd69bcb00a6ecc1ba2b4a3465de4d4dd3e0a3db1@initia-testnet-seed.itrocket.net:51656,ade4d8bc8cbe014af6ebdf3cb7b1e9ad36f412c0@testnet-seeds.polkachu.com:25756"
@@ -142,13 +142,13 @@ sed -i -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persisten
 ```
 
 
-GAS PURNING AYAR KODU
+#GAS PURNING AYAR KODU
 
 ```shell
 sed -i -e "s|^minimum-gas-prices *=.*|minimum-gas-prices = \"0.15uinit,0.01uusdc\"|" $HOME/.initia/config/app.toml
 ```
 
-PRUNING INDEXER
+#PRUNING INDEXER
 
 ```shell
 sed -i -e "s/^pruning *=.*/pruning = \"custom\"/" $HOME/.initia/config/app.toml
@@ -159,12 +159,12 @@ sed -i "s/^indexer *=.*/indexer = \"null\"/" $HOME/.initia/config/config.toml
 
 
 
-SNAP KODU
+#SNAP KODU
 ```shell
 initiad tendermint unsafe-reset-all --home $HOME/.initia
 curl -o - -L http://37.120.189.81/initia_testnet/initia_snap.tar.lz4 | lz4 -c -d - | tar -x -C $HOME/.initia
 ```
-LOG (KONTROL) KODU
+#LOG (KONTROL) KODU
 ```shell
 sudo journalctl -u initiad.service -f --no-hostname -o cat
 ```
