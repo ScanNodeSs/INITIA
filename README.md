@@ -4,10 +4,10 @@
 
 
 
+EXPLORER:https://scan.testnet.initia.xyz/initiation-1
 
 
-
-#GEREKSİNİMLER
+#GEREKLİLİKLER
 
 ```shell
 sudo apt update && sudo apt upgrade -y
@@ -169,3 +169,85 @@ curl -o - -L http://37.120.189.81/initia_testnet/initia_snap.tar.lz4 | lz4 -c -d
 sudo journalctl -u initiad.service -f --no-hostname -o cat
 ```
 
+
+#CÜZDAN OLUŞTURMA
+
+Eğer hiç cüzdanınız yoksa yeni oluşturun bunun için 1. kodu kullanın cüzdanınız varsa platform testindeki cüzdanınızı import etmeniz önerilir,bunun için 2. kodu kullanın
+
+1.KOD:Yeni cüzdan oluşturma kodu
+
+```shell
+initiad keys add cuzdan-adini-yaz
+```
+
+2.KOD:Önceden olan bir cüzdanı kayıt etme (import)
+
+```shell
+initiad keys add wallet --recover
+```
+
+
+#VALİDATOR OLUŞTURMA
+
+ÖNEMLİ NOT:bloklarınız initia explorerdeki bloklarla eşitlenmeden (syn) validator oluşmaz hata verir lütfen log kontrol kodu blok yüksekliğine bakınız.
+
+```shell
+initiad tx mstaking create-validator \
+  --amount=5000000uinit \
+  --pubkey=$(initiad tendermint show-validator) \
+  --moniker=MONIKER-YAZ \
+  --chain-id=initiation-1 \
+  --commission-rate=0.05 \
+  --commission-max-rate=0.10 \
+  --commission-max-change-rate=0.01 \
+  --from=CUZDAN-ADI-YAZ \
+  --identity="" \
+  --website="" \
+  --details="" \
+  --node=http://localhost:15657 \
+  --gas-adjustment 1.4 \
+  --gas auto \
+  --gas-prices 0.15uinit \
+  -y
+```
+
+#EDİT VALİDATOR
+
+Valitor bilgilerinizi bu kodla yeniden düzenleyebilirsiniz.
+
+
+```shell
+  initiad tx mstaking edit-validator \
+--moniker "isim-yaz" \
+--from cüzdan-adi-yaz \
+--gas-adjustment 1.4 \
+--gas auto \
+--gas-prices 0.15uinit \
+-y
+```
+
+#KENDİNE DELEGE KODU
+```shell
+initiad tx mstaking delegate $(initiad keys show wallet --bech val -a)  miktar000000uinit --from wallet --gas-adjustment 1.4 --gas auto --gas-prices 0.15uinit --node=http://localhost:15657 -y
+```
+
+
+#UNJAİL KODU
+
+Bu kodu jail olmadan girmeyiniz
+
+```shell
+initiad tx slashing unjail --from wallet --chain-id initiation-1 --gas-adjustment 1.4 --gas auto --gas-prices 0.15uinit --node=http://localhost:15657 -y
+```
+
+#ÖDÜL ÇEKME KODU
+```shell
+initiad tx distribution withdraw-rewards $(initiad keys show wallet --bech val -a) --commission --from wallet --chain-id initiation-1 --gas-adjustment 1.4 --gas auto --gas-prices 0.15uinit --node=http://localhost:15657 -y
+```
+#OYLAMA KODU
+
+```shell
+initiad tx gov vote 128 yes --from wallet --chain-id initiation-1 --gas-adjustment 1.4 --gas auto --gas-prices 0.15uinit --node=http://localhost:15657 -y
+```
+
+CORE NODE ekibine teşekkürler...
