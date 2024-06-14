@@ -4,7 +4,9 @@
 
 
 
-EXPLORER:https://scan.testnet.initia.xyz/initiation-1
+EXPLORER
+
+https://scan.testnet.initia.xyz/initiation-1
 
 
 #GEREKLİLİKLER
