@@ -31,6 +31,7 @@ source $HOME/.bash_profile
 
 GEREKLİ DOSYALARIN ÇEKİLMESİ
 
+
 1.KOD
 ```shell
 git clone https://github.com/initia-labs/initia
