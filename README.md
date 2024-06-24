@@ -252,4 +252,11 @@ initiad tx distribution withdraw-rewards $(initiad keys show wallet --bech val -
 initiad tx gov vote 128 yes --from wallet --chain-id initiation-1 --gas-adjustment 1.4 --gas auto --gas-prices 0.15uinit --node=http://localhost:15657 -y
 ```
 
+
+#Validator Detayları
+
+```shell
+initiad query mstaking validator $(initiad keys show initvberra --bech val -a)
+```
+
 CORE NODE ekibine teşekkürler...
