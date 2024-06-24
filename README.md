@@ -256,7 +256,7 @@ initiad tx gov vote 128 yes --from wallet --chain-id initiation-1 --gas-adjustme
 #Validator Detayları
 
 ```shell
-initiad query mstaking validator $(initiad keys show initvberra --bech val -a)
+initiad query mstaking validator $(initiad keys show cüzdanadınıyaz --bech val -a)
 ```
 
 CORE NODE ekibine teşekkürler...
